@@ -1,0 +1,7 @@
+{
+  "name": "TrustServe AI",
+  "description": "A smart home service booking platform featuring AI-powered quality assurance, multi-language chat assistance, and dynamic trust verification.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
