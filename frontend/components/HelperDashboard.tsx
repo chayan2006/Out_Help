@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Wallet, Calendar, Star, TrendingUp, Power, MapPin, Check, X } from 'lucide-react';
-import { EarningsData, Booking } from '../types';
+import { EarningsData, Booking, EarningRecord } from '../types';
 import { useAuth } from '../contexts/AuthContext';
-import { subscribeToIncomingJobs, acceptBooking } from '../services/bookingService';
-
-const data: EarningsData[] = [
-  { day: 'Mon', amount: 120 },
-  { day: 'Tue', amount: 200 },
-  { day: 'Wed', amount: 150 },
-  { day: 'Thu', amount: 280 },
-  { day: 'Fri', amount: 190 },
-  { day: 'Sat', amount: 350 },
-  { day: 'Sun', amount: 310 },
-];
+import { subscribeToIncomingJobs, acceptBooking, fetchHelperEarnings } from '../services/bookingService';
 
 const HelperDashboard: React.FC = () => {
   const { user } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
   const [incomingJobs, setIncomingJobs] = useState<Booking[]>([]);
+  const [earnings, setEarnings] = useState<EarningRecord[]>([]);
+  const [totalEarnings, setTotalEarnings] = useState(0);
 
   useEffect(() => {
     if (isOnline) {
@@ -30,6 +22,36 @@ const HelperDashboard: React.FC = () => {
       setIncomingJobs([]);
     }
   }, [isOnline]);
+
+  useEffect(() => {
+    const loadEarnings = async () => {
+      if (user) {
+        const data = await fetchHelperEarnings(user.uid);
+        setEarnings(data);
+        const total = data.reduce((sum, record) => sum + record.amount, 0);
+        setTotalEarnings(total);
+      }
+    };
+    loadEarnings();
+    const interval = setInterval(loadEarnings, 10000); // Polling for earnings
+    return () => clearInterval(interval);
+  }, [user]);
+
+  // Process earnings for the chart
+  const chartData = earnings.length > 0
+    ? earnings.slice(0, 7).map(e => ({
+      day: new Date(e.timestamp).toLocaleDateString('en-US', { weekday: 'short' }),
+      amount: e.amount
+    }))
+    : [
+      { day: 'Mon', amount: 0 },
+      { day: 'Tue', amount: 0 },
+      { day: 'Wed', amount: 0 },
+      { day: 'Thu', amount: 0 },
+      { day: 'Fri', amount: 0 },
+      { day: 'Sat', amount: 0 },
+      { day: 'Sun', amount: 0 },
+    ];
 
   const handleJobAction = async (id: string, action: 'accept' | 'reject') => {
     if (action === 'reject') {
@@ -73,7 +95,7 @@ const HelperDashboard: React.FC = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-slate-500 text-sm">Today's Earnings</p>
-                  <h3 className="text-2xl font-bold text-slate-900 mt-1">$120</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mt-1">₹{totalEarnings.toLocaleString()}</h3>
                 </div>
                 <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
                   <Wallet className="w-5 h-5" />
@@ -108,10 +130,10 @@ const HelperDashboard: React.FC = () => {
             <h3 className="text-lg font-bold text-slate-800 mb-6">Weekly Performance</h3>
             <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data}>
+                <BarChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                   <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: '#64748b' }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b' }} prefix="$" />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b' }} prefix="₹" />
                   <Tooltip
                     cursor={{ fill: '#f1f5f9' }}
                     contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
@@ -150,7 +172,7 @@ const HelperDashboard: React.FC = () => {
                   <div key={job.id} className="p-4 border border-slate-100 rounded-lg bg-slate-50 animate-fade-in">
                     <div className="flex justify-between mb-2">
                       <h4 className="font-semibold text-slate-900">{job.service}</h4>
-                      <span className="font-bold text-emerald-600">${job.price}</span>
+                      <span className="font-bold text-emerald-600">₹{job.price}</span>
                     </div>
                     <div className="flex items-center text-xs text-slate-500 mb-3 gap-2">
                       <MapPin className="w-3 h-3" /> {job.location}

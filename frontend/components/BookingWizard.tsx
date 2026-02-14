@@ -100,7 +100,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({ initialServiceId, onCompl
                   }`}
               >
                 <div className="font-semibold">{service.name}</div>
-                <div className="text-sm text-slate-500 mt-1">Starts at ${service.basePrice}</div>
+                <div className="text-sm text-slate-500 mt-1">Starts at ₹{service.basePrice}</div>
               </button>
             ))}
           </div>
@@ -191,7 +191,7 @@ const BookingWizard: React.FC<BookingWizardProps> = ({ initialServiceId, onCompl
             <div className="h-px bg-slate-200 my-2" />
             <div className="flex justify-between text-lg">
               <span className="font-bold text-slate-800">Total Estimate</span>
-              <span className="font-bold text-indigo-600">${getPrice().toFixed(2)}</span>
+              <span className="font-bold text-indigo-600">₹{getPrice().toFixed(2)}</span>
             </div>
           </div>
 

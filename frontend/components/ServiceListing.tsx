@@ -70,7 +70,7 @@ const ServiceListing: React.FC<ServiceListingProps> = ({ onBookService }) => {
               <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                 <div>
                   <span className="text-xs text-slate-500 block">Starts at</span>
-                  <span className="text-lg font-bold text-slate-900">${service.basePrice}</span>
+                  <span className="text-lg font-bold text-slate-900">₹{service.basePrice}</span>
                 </div>
                 <button
                   onClick={() => onBookService(service.id)}

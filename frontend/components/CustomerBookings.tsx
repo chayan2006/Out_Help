@@ -168,7 +168,7 @@ const CustomerBookings: React.FC = () => {
                   <span className="text-xs font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded">ID: {booking.id}</span>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-slate-900">${booking.price}</div>
+                  <div className="text-3xl font-bold text-slate-900">₹{booking.price}</div>
                   <div className="text-sm text-slate-500">Estimated Total</div>
                 </div>
               </div>

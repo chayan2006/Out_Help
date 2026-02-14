@@ -39,9 +39,17 @@ export const useFirestoreCollection = <T = any>(collectionName: string, ...query
     }, [collectionName]);
 
     const add = async (newData: any) => {
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Firestore Timeout")), 10000)
+        );
+
         try {
-            const colRef = collection(db, collectionName);
-            await addDoc(colRef, newData);
+            const addPromise = (async () => {
+                const colRef = collection(db, collectionName);
+                return await addDoc(colRef, newData);
+            })();
+
+            return await Promise.race([addPromise, timeoutPromise]);
         } catch (err: any) {
             setError(err.message);
             throw err;
@@ -80,9 +88,17 @@ export const useFirestoreDoc = <T = any>(collectionName: string, docId: string) 
     }, [collectionName, docId]);
 
     const update = async (newData: Partial<T>) => {
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Firestore Timeout")), 10000)
+        );
+
         try {
-            const docRef = doc(db, collectionName, docId);
-            await updateDoc(docRef, newData as any);
+            const updatePromise = (async () => {
+                const docRef = doc(db, collectionName, docId);
+                await updateDoc(docRef, newData as any);
+            })();
+
+            return await Promise.race([updatePromise, timeoutPromise]);
         } catch (err: any) {
             setError(err.message);
             throw err;
@@ -90,9 +106,17 @@ export const useFirestoreDoc = <T = any>(collectionName: string, docId: string) 
     };
 
     const set = async (newData: T) => {
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Firestore Timeout")), 10000)
+        );
+
         try {
-            const docRef = doc(db, collectionName, docId);
-            await setDoc(docRef, newData as any);
+            const setPromise = (async () => {
+                const docRef = doc(db, collectionName, docId);
+                await setDoc(docRef, newData as any);
+            })();
+
+            return await Promise.race([setPromise, timeoutPromise]);
         } catch (err: any) {
             setError(err.message);
             throw err;

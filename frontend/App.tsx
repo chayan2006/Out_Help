@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ShieldCheck, User as UserIcon, Menu, X, LayoutDashboard, Sparkles, Home as HomeIcon, LogOut, Calendar, Grid, Crown, MapPin } from 'lucide-react';
-import ChatAssistant from './components/ChatAssistant';
+import { ShieldCheck, User as UserIcon, Menu, X, LayoutDashboard, Sparkles, Home as HomeIcon, LogOut, Calendar, Grid, Crown, MapPin, Bot } from 'lucide-react';
+import ServiceNotifications from './components/ServiceNotifications';
 import QualityAssurance from './components/QualityAssurance';
 import HelperDashboard from './components/HelperDashboard';
 import BookingWizard from './components/BookingWizard';
@@ -115,8 +115,46 @@ const App: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <div className="lg:w-1/2 w-full">
-                <ChatAssistant />
+              <div className="lg:w-1/2 w-full hidden lg:flex justify-center">
+                <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+                  <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center text-center group">
+                    <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors text-indigo-600">
+                      <Sparkles className="w-6 h-6" />
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 mb-1">98%</div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Quality Score</div>
+                  </div>
+
+                  <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center text-center group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors text-emerald-600">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 mb-1">100%</div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Verified Partners</div>
+                  </div>
+
+                  <div className="col-span-2 bg-gradient-to-br from-indigo-600 to-indigo-800 p-8 rounded-3xl shadow-xl border border-indigo-700 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                      <Bot className="w-24 h-24 text-white" />
+                    </div>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span className="text-xs font-bold text-indigo-100 uppercase tracking-widest">Live Platform Activity</span>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <div className="text-4xl font-black text-white mb-1">2,480+</div>
+                          <div className="text-sm font-medium text-indigo-200">Active Bookings Today</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-white mb-1">12m</div>
+                          <div className="text-[10px] font-bold text-indigo-200 uppercase tracking-wider">Avg. Response Time</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -294,6 +332,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </footer>
+      <ServiceNotifications />
     </div>
   );
 };

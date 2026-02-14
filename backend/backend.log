@@ -1,0 +1,71 @@
+2026-02-13T23:57:57.501Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  write to custom object with { processEnv: myObject }[0m
+2026-02-13T23:57:57.666Z [LOG] Firebase Admin & Firestore initialized
+2026-02-13T23:57:57.668Z [LOG] Gemini API Key Presence:
+2026-02-13T23:57:57.673Z [LOG] Backend server running at http://localhost:5000
+2026-02-13T23:58:04.077Z [ERROR] Chat Error:
+2026-02-13T23:58:15.321Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild[0m
+2026-02-13T23:58:15.498Z [LOG] Firebase Admin & Firestore initialized
+2026-02-13T23:58:15.499Z [LOG] Gemini API Key Presence: true
+2026-02-13T23:58:15.504Z [LOG] Backend server running at http://localhost:5000
+2026-02-13T23:58:33.739Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-13T23:58:53.008Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }[0m
+2026-02-13T23:58:53.158Z [LOG] Firebase Admin & Firestore initialized
+2026-02-13T23:58:53.160Z [LOG] Gemini API Key Presence: true
+2026-02-13T23:58:53.164Z [LOG] Backend server running at http://localhost:5000
+2026-02-13T23:59:52.987Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-14T00:00:38.687Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-14T00:00:47.357Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-14T00:00:56.731Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }[0m
+2026-02-14T00:00:56.909Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:00:56.911Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:00:56.916Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:01:26.141Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-14T00:01:31.962Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  enable debug logging with { debug: true }[0m
+2026-02-14T00:01:32.122Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:01:32.123Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:01:32.128Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:01:59.679Z [ERROR] Chat Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent: [404 Not Found] models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2026-02-14T00:04:24.645Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  suppress all logs with { quiet: true }[0m
+2026-02-14T00:04:24.789Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:04:24.791Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:04:24.795Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:16:42.437Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild[0m
+2026-02-14T00:16:42.638Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:16:42.639Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:16:42.643Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:36:55.760Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚡️ secrets for agents: https://dotenvx.com/as2[0m
+2026-02-14T00:36:55.934Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:36:55.936Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:36:55.940Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:37:09.100Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }[0m
+2026-02-14T00:37:09.255Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:37:09.272Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:37:09.276Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:37:09.277Z [LOG] Connected to SQLite database.
+2026-02-14T00:37:55.147Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  enable debug logging with { debug: true }[0m
+2026-02-14T00:37:55.303Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:37:55.316Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:37:55.320Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:37:55.321Z [LOG] Connected to SQLite database.
+2026-02-14T00:38:28.933Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  enable debug logging with { debug: true }[0m
+2026-02-14T00:38:29.087Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:38:29.104Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:38:29.109Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:38:29.110Z [LOG] Connected to SQLite database.
+2026-02-14T00:38:37.000Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild[0m
+2026-02-14T00:38:37.165Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:38:37.179Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:38:37.283Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:38:37.287Z [LOG] Connected to SQLite database.
+2026-02-14T00:39:02.568Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🤖 agentic secret storage: https://dotenvx.com/as2[0m
+2026-02-14T00:39:02.756Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:39:02.773Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:39:02.897Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:39:02.902Z [LOG] Connected to SQLite database.
+2026-02-14T00:39:53.152Z [ERROR] Razorpay Order Error: [object Object]
+2026-02-14T00:39:59.476Z [ERROR] Razorpay Order Error: [object Object]
+2026-02-14T00:44:23.836Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🛡️ auth for agents: https://vestauth.com[0m
+2026-02-14T00:44:24.058Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:44:24.076Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:44:24.080Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:44:24.080Z [LOG] Connected to SQLite database.

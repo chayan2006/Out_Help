@@ -4,11 +4,13 @@ export enum UserRole {
 }
 
 export interface User {
-  uid: string; // Changed from id to uid to match Firebase
-  displayName: string | null; // Changed from name to displayName
+  uid: string;
+  displayName: string | null;
   role: UserRole;
   email: string | null;
   photoURL?: string | null;
+  subscriptionPlanId?: string;
+  subscriptionStatus?: 'active' | 'inactive';
 }
 
 export interface ChatMessage {
@@ -29,11 +31,27 @@ export interface Booking {
   id: string;
   service: string;
   date: string;
-  status: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled';
+  status: 'Pending' | 'Confirmed' | 'InProgress' | 'Completed' | 'Cancelled';
   price: number;
+  customerId: string;
+  customerName: string;
+  helperId?: string;
   helperName?: string;
   location: string;
   createdAt?: any; // Firestore Timestamp
+  acceptedAt?: any;
+  completedAt?: any;
+}
+
+export interface EarningRecord {
+  id: string;
+  bookingId: string;
+  helperId: string;
+  customerId: string;
+  amount: number;
+  timestamp: any;
+  serviceName: string;
+  status: 'pending' | 'received';
 }
 
 export interface EarningsData {
