@@ -33,21 +33,19 @@ try {
     console.error("Firebase Admin initialization failed:", e.message);
 }
 
-// Initialize SQLite
+// Initialize SQLite and create tables
 const sqlite3 = require('sqlite3').verbose();
-const dbPath = path.join(__dirname, 'database.sqlite');
-const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) console.error('SQLite connection error:', err.message);
+const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) => {
+    if (err) console.error('Database connection error:', err);
     else console.log('Connected to SQLite database.');
 });
 
-// Create tables
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS users (
         uid TEXT PRIMARY KEY,
-        email TEXT UNIQUE,
+        email TEXT,
         display_name TEXT,
-        role TEXT DEFAULT 'CUSTOMER',
+        role TEXT,
         subscription_plan_id TEXT DEFAULT 'free',
         subscription_status TEXT DEFAULT 'inactive',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -55,15 +53,15 @@ db.serialize(() => {
 
     db.run(`CREATE TABLE IF NOT EXISTS bookings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        service_name TEXT NOT NULL,
+        service_name TEXT,
         customer_id TEXT,
         customer_name TEXT,
         helper_id TEXT,
         helper_name TEXT,
-        location TEXT,
-        booking_date DATETIME,
-        price REAL,
+        booking_date TEXT,
         status TEXT DEFAULT 'Pending',
+        price REAL,
+        location TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(customer_id) REFERENCES users(uid),
         FOREIGN KEY(helper_id) REFERENCES users(uid)
@@ -75,12 +73,47 @@ db.serialize(() => {
         helper_id TEXT,
         customer_id TEXT,
         amount REAL,
-        status TEXT DEFAULT 'received',
         recorded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(booking_id) REFERENCES bookings(id),
         FOREIGN KEY(helper_id) REFERENCES users(uid)
     )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS chat_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT,
+        role TEXT,
+        text TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
+
+    // NEW PAYMENT RECEIPTS TABLE
+    db.run(`CREATE TABLE IF NOT EXISTS payment_receipts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT,
+        plan_name TEXT,
+        amount REAL,
+        transaction_id TEXT,
+        proof_path TEXT,
+        ticket_number TEXT UNIQUE,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
 });
+
+// Setup Multer for Screenshots
+const multer = require('multer');
+const uploadDir = path.join(__dirname, 'uploads', 'proofs');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadDir),
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 app.use(cors());
 app.use(express.json());
@@ -189,8 +222,44 @@ app.get('/', (req, res) => {
 
 // Razorpay removed 
 
-// Create Booking
-app.post('/api/bookings', (req, res) => {
+// Payment Verification & Proof Upload
+app.post('/api/verify-payment', upload.single('proof'), (req, res) => {
+    const { uid, planId, transactionId, amount, planName } = req.body;
+    const proofPath = req.file ? `/uploads/proofs/${req.file.filename}` : null;
+    const ticketNumber = 'TS-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+    if (!uid || !planId || !transactionId) {
+        return res.status(400).json({ error: "Missing required payment details" });
+    }
+
+    db.serialize(() => {
+        // Record Receipt
+        db.run(`INSERT INTO payment_receipts (user_id, plan_name, amount, transaction_id, proof_path, ticket_number) 
+                VALUES (?, ?, ?, ?, ?, ?)`,
+            [uid, planName, amount, transactionId, proofPath, ticketNumber],
+            (err) => {
+                if (err) return res.status(500).json({ error: err.message });
+
+                // Upgrade User Immediately (Manual check later)
+                db.run(`UPDATE users SET subscription_plan_id = ?, subscription_status = 'active' WHERE uid = ?`,
+                    [planId, uid],
+                    (updateErr) => {
+                        if (updateErr) return res.status(500).json({ error: updateErr.message });
+
+                        res.json({
+                            success: true,
+                            ticketNumber,
+                            date: new Date().toLocaleString()
+                        });
+                    }
+                );
+            }
+        );
+    });
+});
+
+// Update User Subscription
+app.patch('/api/users/:uid/upgrade', (req, res) => {
     const { service, customerId, customerName, date, price, location } = req.body;
     db.run(`INSERT INTO bookings (service_name, customer_id, customer_name, booking_date, price, location) 
             VALUES (?, ?, ?, ?, ?, ?)`,

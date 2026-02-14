@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Star, Shield, Zap, Loader2 } from 'lucide-react';
+import { Check, Star, Shield, Zap, Loader2, ArrowLeft, Camera, Ticket, Download } from 'lucide-react';
 import { SubscriptionPlan } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { useFirestoreDoc } from '../hooks/useFirestore';
@@ -36,12 +36,24 @@ const SubscriptionPage: React.FC = () => {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [showCheckout, setShowCheckout] = useState<string | null>(null);
 
-  const { data: profileData, set: setProfileData } = useFirestoreDoc(
-    'users',
-    user?.uid || ''
-  );
+  // New States for Payment Proof
+  const [transactionId, setTransactionId] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [ticketData, setTicketData] = useState<{ ticketNumber: string, date: string } | null>(null);
 
+  const { data: profileData } = useFirestoreDoc('users', user?.uid || '');
   const currentPlanId = profileData?.subscriptionPlanId || 'free';
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => setPreviewUrl(reader.result as string);
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSelectPlan = async (planId: string) => {
     if (!user) {
@@ -54,12 +66,56 @@ const SubscriptionPage: React.FC = () => {
       executeUpgrade('free');
     } else {
       setShowCheckout(planId);
+      setTicketData(null);
+      setTransactionId('');
+      setSelectedFile(null);
+      setPreviewUrl(null);
+    }
+  };
+
+  const submitPaymentProof = async () => {
+    if (!user || !showCheckout || !transactionId || !selectedFile) {
+      setMessage({ type: 'error', text: 'Please provide all payment details and proof.' });
+      return;
+    }
+
+    const plan = plans.find(p => p.id === showCheckout);
+    if (!plan) return;
+
+    setIsUpdating(showCheckout);
+    setMessage(null);
+
+    const formData = new FormData();
+    formData.append('uid', user.uid);
+    formData.append('planId', showCheckout);
+    formData.append('planName', plan.name);
+    formData.append('transactionId', transactionId);
+    formData.append('amount', (billingCycle === 'monthly' ? plan.priceMonthly : plan.priceYearly).toString());
+    formData.append('proof', selectedFile);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/verify-payment`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setTicketData({ ticketNumber: data.ticketNumber, date: data.date });
+        setMessage({ type: 'success', text: 'Payment verification submitted successfully! 🎉' });
+      } else {
+        throw new Error(data.error || 'Failed to submit payment proof');
+      }
+    } catch (error) {
+      console.error("Payment proof submission failed:", error);
+      setMessage({ type: 'error', text: 'Failed to submit proof. Please try again.' });
+    } finally {
+      setIsUpdating(null);
     }
   };
 
   const executeUpgrade = async (planId: string) => {
     if (!user) return;
-
     setIsUpdating(planId);
     setMessage(null);
 
@@ -95,61 +151,145 @@ const SubscriptionPage: React.FC = () => {
       {showCheckout && selectedPlanDetails && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[1000] flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
-            <div className="bg-indigo-600 p-6 text-white text-center">
-              <Zap className="w-12 h-12 mx-auto mb-2 opacity-80" />
-              <h3 className="text-xl font-bold">QR Payment</h3>
-              <p className="text-indigo-100 text-sm mt-1">Scan to upgrade to {selectedPlanDetails.name}</p>
-            </div>
 
-            <div className="p-8 space-y-6">
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
-                <div className="flex justify-between text-sm text-slate-500">
-                  <span>Plan</span>
-                  <span className="font-semibold text-slate-900">{selectedPlanDetails.name}</span>
+            {ticketData ? (
+              // CONFIRMATION TICKET VIEW
+              <div className="p-8 text-center space-y-6">
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 animate-bounce">
+                  <Check className="w-8 h-8" />
                 </div>
-                <div className="flex justify-between items-center font-bold text-slate-900">
-                  <span>Amount Due</span>
-                  <span className="text-xl text-indigo-600">₹{billingCycle === 'monthly' ? selectedPlanDetails.priceMonthly : selectedPlanDetails.priceYearly}</span>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">Payment Verified!</h3>
+                  <p className="text-slate-500">Your {selectedPlanDetails.name} membership is now active.</p>
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center justify-center space-y-4">
-                <div className="bg-white p-4 rounded-2xl shadow-inner border border-slate-100">
-                  <img
-                    src={`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/assets/${billingCycle === 'monthly' ? selectedPlanDetails.priceMonthly : selectedPlanDetails.priceYearly}.png`}
-                    alt="Payment QR Code"
-                    className="w-48 h-auto rounded-lg mx-auto"
-                  />
+                <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-2 bg-indigo-600"></div>
+                  <div className="flex justify-between items-center mb-4">
+                    <Ticket className="w-6 h-6 text-indigo-400" />
+                    <span className="text-[10px] font-bold text-indigo-600 tracking-widest uppercase">Official Receipt</span>
+                  </div>
+                  <div className="space-y-3 text-left">
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-xs text-slate-400">Transaction ID</span>
+                      <span className="text-xs font-mono font-bold">{transactionId}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-xs text-slate-400">Ticket Number</span>
+                      <span className="text-xs font-bold text-indigo-600">{ticketData.ticketNumber}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-xs text-slate-400">Plan</span>
+                      <span className="text-xs font-bold">{selectedPlanDetails.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-xs text-slate-400">Date</span>
+                      <span className="text-xs font-bold">{ticketData.date}</span>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs text-slate-500 text-center px-4">
-                  Scan this QR code with any UPI app (GPay, PhonePe, Paytm) to pay.
-                </p>
-              </div>
 
-              <div className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Transaction Reference Number"
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600 outline-none"
-                />
-                <button
-                  onClick={() => executeUpgrade(showCheckout)}
-                  disabled={isUpdating !== null}
-                  className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  {isUpdating ? <Loader2 className="w-5 h-5 animate-spin" /> : 'I Have Paid'}
-                </button>
                 <button
                   onClick={() => setShowCheckout(null)}
-                  className="w-full py-2 text-slate-400 font-medium hover:text-slate-600 text-sm transition-colors"
+                  className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
                 >
-                  Back to Plans
+                  <Download className="w-4 h-4" /> Finalize Upgrade
                 </button>
               </div>
-              <p className="text-[10px] text-center text-slate-400">
-                <Shield className="w-3 h-3 inline mr-1" /> Manual Verification via UPI Transaction ID.
-              </p>
-            </div>
+            ) : (
+              // PAYMENT & PROOF UPLOAD VIEW
+              <>
+                <div className="bg-indigo-600 p-6 text-white text-center relative">
+                  <button
+                    onClick={() => setShowCheckout(null)}
+                    className="absolute left-6 top-8 text-white/70 hover:text-white transition-colors"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                  </button>
+                  <Zap className="w-12 h-12 mx-auto mb-2 opacity-80" />
+                  <h3 className="text-xl font-bold">QR Payment</h3>
+                  <p className="text-indigo-100 text-sm mt-1">Scan to upgrade to {selectedPlanDetails.name}</p>
+                </div>
+
+                <div className="p-8 space-y-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                    <div className="flex justify-between text-sm text-slate-500">
+                      <span>Plan</span>
+                      <span className="font-semibold text-slate-900">{selectedPlanDetails.name} ({billingCycle})</span>
+                    </div>
+                    <div className="flex justify-between items-center font-bold text-slate-900">
+                      <span>Amount Due</span>
+                      <span className="text-xl text-indigo-600">₹{billingCycle === 'monthly' ? selectedPlanDetails.priceMonthly : selectedPlanDetails.priceYearly}</span>
+                    </div>
+                  </div>
+
+                  {/* QR Code Section */}
+                  <div className="flex flex-col items-center justify-center space-y-4">
+                    <div className="bg-white p-4 rounded-2xl shadow-inner border border-slate-100">
+                      <img
+                        src={`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/assets/${billingCycle === 'monthly' ? selectedPlanDetails.priceMonthly : selectedPlanDetails.priceYearly}.png`}
+                        alt="Payment QR Code"
+                        className="w-44 h-auto rounded-lg mx-auto"
+                      />
+                    </div>
+                    <p className="text-xs text-slate-500 text-center px-4">
+                      Scan with any UPI app to pay ₹{billingCycle === 'monthly' ? selectedPlanDetails.priceMonthly : selectedPlanDetails.priceYearly}.
+                    </p>
+                  </div>
+
+                  {/* Proof Upload Section */}
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Transaction Details</label>
+                      <input
+                        type="text"
+                        value={transactionId}
+                        onChange={(e) => setTransactionId(e.target.value)}
+                        placeholder="Enter UPI Transaction ID (Reference #)"
+                        className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600 outline-none transition-all"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Upload Screenshot (Proof)</label>
+                      <div className="relative group">
+                        {previewUrl ? (
+                          <div className="relative w-full aspect-video bg-slate-100 rounded-xl overflow-hidden border-2 border-indigo-600 border-dashed">
+                            <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                            <button
+                              onClick={() => { setSelectedFile(null); setPreviewUrl(null); }}
+                              className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 transition-colors"
+                            >
+                              <Check className="w-4 h-4 rotate-45" />
+                            </button>
+                          </div>
+                        ) : (
+                          <label className="flex flex-col items-center justify-center w-full aspect-video border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 hover:bg-slate-100 hover:border-indigo-300 transition-all cursor-pointer group">
+                            <Camera className="w-8 h-8 text-slate-300 mb-2 group-hover:scale-110 transition-transform" />
+                            <span className="text-sm text-slate-400 font-medium">Click to upload screenshot</span>
+                            <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+                          </label>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-2">
+                    <button
+                      onClick={submitPaymentProof}
+                      disabled={isUpdating !== null || !transactionId || !selectedFile}
+                      className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 disabled:opacity-50 transition-all active:scale-[0.98]"
+                    >
+                      {isUpdating ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Confirm & Generate Ticket'}
+                    </button>
+                  </div>
+
+                  <p className="text-[10px] text-center text-slate-400 pb-4">
+                    <Shield className="w-3 h-3 inline mr-1" /> All payments are manually verified for security.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -161,8 +301,7 @@ const SubscriptionPage: React.FC = () => {
         </p>
 
         {message && (
-          <div className={`mb-6 p-4 rounded-xl text-sm font-medium animate-in slide-in-from-top-4 ${message.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-700 border border-red-100'
-            }`}>
+          <div className={`mb-6 p-4 rounded-xl text-sm font-medium animate-in slide-in-from-top-4 ${message.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-700 border border-red-100'}`}>
             {message.text}
           </div>
         )}
@@ -170,15 +309,13 @@ const SubscriptionPage: React.FC = () => {
         <div className="inline-flex bg-white rounded-full p-1 border border-slate-200 shadow-sm transition-all hover:border-slate-300">
           <button
             onClick={() => setBillingCycle('monthly')}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${billingCycle === 'monthly' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'
-              }`}
+            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${billingCycle === 'monthly' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
           >
             Monthly
           </button>
           <button
             onClick={() => setBillingCycle('yearly')}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${billingCycle === 'yearly' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'
-              }`}
+            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${billingCycle === 'yearly' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
           >
             Yearly <span className="text-xs ml-1 opacity-80">(Save 20%)</span>
           </button>
@@ -189,8 +326,7 @@ const SubscriptionPage: React.FC = () => {
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={`relative bg-white rounded-3xl shadow-sm border p-10 flex flex-col transition-all hover:shadow-2xl hover:-translate-y-1 ${plan.isPopular ? 'border-indigo-600 ring-4 ring-indigo-600 ring-opacity-10 shadow-indigo-100 z-10' : 'border-slate-200'
-              }`}
+            className={`relative bg-white rounded-3xl shadow-sm border p-10 flex flex-col transition-all hover:shadow-2xl hover:-translate-y-1 ${plan.isPopular ? 'border-indigo-600 ring-4 ring-indigo-600 ring-opacity-10 shadow-indigo-100 z-10' : 'border-slate-200'}`}
           >
             {plan.isPopular && (
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-6 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
@@ -223,12 +359,7 @@ const SubscriptionPage: React.FC = () => {
             <button
               onClick={() => handleSelectPlan(plan.id)}
               disabled={isUpdating !== null || currentPlanId === plan.id}
-              className={`w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 transform active:scale-95 ${currentPlanId === plan.id
-                ? 'bg-emerald-50 text-emerald-600 border-2 border-emerald-100 cursor-default shadow-none'
-                : plan.isPopular
-                  ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl shadow-indigo-200'
-                  : 'bg-slate-900 text-white hover:bg-slate-800 shadow-xl shadow-slate-200'
-                }`}
+              className={`w-full py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 transform active:scale-95 ${currentPlanId === plan.id ? 'bg-emerald-50 text-emerald-600 border-2 border-emerald-100 cursor-default shadow-none' : plan.isPopular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl shadow-indigo-200' : 'bg-slate-900 text-white hover:bg-slate-800 shadow-xl shadow-slate-200'}`}
             >
               {isUpdating === plan.id ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

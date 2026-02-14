@@ -69,3 +69,28 @@
 2026-02-14T00:44:24.076Z [LOG] Gemini API Key Presence: true
 2026-02-14T00:44:24.080Z [LOG] Backend server running at http://localhost:5000
 2026-02-14T00:44:24.080Z [LOG] Connected to SQLite database.
+2026-02-14T00:48:46.425Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  enable debug logging with { debug: true }[0m
+2026-02-14T00:48:46.620Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:48:46.641Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:48:46.645Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:48:46.645Z [LOG] Connected to SQLite database.
+2026-02-14T00:53:32.227Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  write to custom object with { processEnv: myObject }[0m
+2026-02-14T00:53:32.379Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T00:53:32.392Z [LOG] Gemini API Key Presence: true
+2026-02-14T00:53:32.395Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T00:53:32.396Z [LOG] Connected to SQLite database.
+2026-02-14T01:00:23.505Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚡️ secrets for agents: https://dotenvx.com/as2[0m
+2026-02-14T01:00:23.711Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:00:23.725Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:00:23.729Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:00:23.730Z [LOG] Connected to SQLite database.
+2026-02-14T01:00:38.429Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit[0m
+2026-02-14T01:00:38.567Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:00:38.629Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:00:38.633Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:00:38.636Z [LOG] Connected to SQLite database.
+2026-02-14T01:00:47.802Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit[0m
+2026-02-14T01:00:47.963Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:00:48.036Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:00:48.040Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:00:48.043Z [LOG] Connected to SQLite database.
