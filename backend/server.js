@@ -258,8 +258,8 @@ app.post('/api/verify-payment', upload.single('proof'), (req, res) => {
     });
 });
 
-// Update User Subscription
-app.patch('/api/users/:uid/upgrade', (req, res) => {
+// Create Booking
+app.post('/api/bookings', (req, res) => {
     const { service, customerId, customerName, date, price, location } = req.body;
     db.run(`INSERT INTO bookings (service_name, customer_id, customer_name, booking_date, price, location) 
             VALUES (?, ?, ?, ?, ?, ?)`,
@@ -267,6 +267,19 @@ app.patch('/api/users/:uid/upgrade', (req, res) => {
         function (err) {
             if (err) return res.status(500).json({ error: err.message });
             res.json({ id: this.lastID });
+        }
+    );
+});
+
+// Update User Subscription
+app.patch('/api/users/:uid/upgrade', (req, res) => {
+    const { uid } = req.params;
+    const { planId, status } = req.body;
+    db.run(`UPDATE users SET subscription_plan_id = ?, subscription_status = ? WHERE uid = ?`,
+        [planId, status, uid],
+        (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true });
         }
     );
 });
