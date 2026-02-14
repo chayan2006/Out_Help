@@ -220,6 +220,32 @@ app.get('/', (req, res) => {
     res.json({ status: "TrustServe Backend is Online ⚡" });
 });
 
+// User Sync & Profile
+app.post('/api/users', (req, res) => {
+    const { uid, email, display_name, role } = req.body;
+    db.run(`INSERT INTO users (uid, email, display_name, role) 
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(uid) DO UPDATE SET 
+            email = excluded.email, 
+            display_name = excluded.display_name,
+            role = COALESCE(users.role, excluded.role)`,
+        [uid, email, display_name, role],
+        (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true });
+        }
+    );
+});
+
+app.get('/api/users/:uid', (req, res) => {
+    const { uid } = req.params;
+    db.get(`SELECT * FROM users WHERE uid = ?`, [uid], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!row) return res.status(404).json({ error: "User not found" });
+        res.json(row);
+    });
+});
+
 // Razorpay removed 
 
 // Payment Verification & Proof Upload
@@ -287,13 +313,52 @@ app.patch('/api/users/:uid/upgrade', (req, res) => {
 // Get Bookings
 app.get('/api/bookings', (req, res) => {
     const { userId, role } = req.query;
-    const column = role === 'HELPER' ? 'helper_id' : 'customer_id';
-    const query = userId
-        ? `SELECT * FROM bookings WHERE ${column} = ? OR (status = 'Pending' AND ? = 'HELPER') ORDER BY created_at DESC`
-        : `SELECT * FROM bookings ORDER BY created_at DESC`;
 
-    db.all(query, [userId, role], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
+    let query;
+    let params = [];
+
+    if (userId) {
+        const column = role === 'HELPER' ? 'helper_id' : 'customer_id';
+        query = `SELECT 
+                    id, 
+                    service_name as service, 
+                    customer_id as customerId, 
+                    customer_name as customerName, 
+                    helper_id as helperId, 
+                    helper_name as helperName, 
+                    booking_date as date, 
+                    status, 
+                    price, 
+                    location, 
+                    created_at as createdAt 
+                FROM bookings 
+                WHERE ${column} = ? OR (status = 'Pending' AND ? = 'HELPER') 
+                ORDER BY created_at DESC`;
+        params = [userId, role];
+    } else {
+        query = `SELECT 
+                    id, 
+                    service_name as service, 
+                    customer_id as customerId, 
+                    customer_name as customerName, 
+                    helper_id as helperId, 
+                    helper_name as helperName, 
+                    booking_date as date, 
+                    status, 
+                    price, 
+                    location, 
+                    created_at as createdAt 
+                FROM bookings 
+                ORDER BY created_at DESC`;
+    }
+
+    console.log(`[GET /api/bookings] userId: ${userId}, role: ${role}`);
+    db.all(query, params, (err, rows) => {
+        if (err) {
+            console.error(`[GET /api/bookings] Error: ${err.message}`);
+            return res.status(500).json({ error: err.message });
+        }
+        console.log(`[GET /api/bookings] Returning ${rows.length} rows`);
         res.json(rows);
     });
 });

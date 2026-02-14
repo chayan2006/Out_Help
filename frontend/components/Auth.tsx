@@ -4,6 +4,7 @@ import { ShieldCheck, User as UserIcon, Wrench, Mail, Phone, Lock, Smartphone } 
 import { useAuth } from '../contexts/AuthContext';
 import { RecaptchaVerifier } from 'firebase/auth';
 import { auth } from '../firebase';
+import { syncUserWithBackend } from '../services/userService';
 
 interface AuthProps {
   onLogin: (user: User) => void;
@@ -53,6 +54,13 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
         photoURL: firebaseUser.photoURL
       };
       onLogin(appUser);
+      // Sync with SQL backend
+      syncUserWithBackend({
+        uid: appUser.uid,
+        email: appUser.email,
+        displayName: appUser.displayName,
+        role: appUser.role
+      });
     } else {
       setNeedsVerification(false);
     }

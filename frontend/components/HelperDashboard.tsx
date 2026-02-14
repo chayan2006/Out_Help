@@ -13,15 +13,15 @@ const HelperDashboard: React.FC = () => {
   const [totalEarnings, setTotalEarnings] = useState(0);
 
   useEffect(() => {
-    if (isOnline) {
-      const unsubscribe = subscribeToIncomingJobs((data) => {
+    if (isOnline && user) {
+      const unsubscribe = subscribeToIncomingJobs(user.uid, (data) => {
         setIncomingJobs(data);
       });
       return () => unsubscribe();
     } else {
       setIncomingJobs([]);
     }
-  }, [isOnline]);
+  }, [isOnline, user]);
 
   useEffect(() => {
     const loadEarnings = async () => {

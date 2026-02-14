@@ -43,12 +43,13 @@ export const subscribeToCustomerBookings = (
 
 // Subscribe to incoming jobs for helpers
 export const subscribeToIncomingJobs = (
+    helperId: string,
     callback: (bookings: Booking[]) => void,
     onError?: (error: Error) => void
 ) => {
     const fetchJobs = async () => {
         try {
-            const response = await fetch(`${API_BASE}/api/bookings?role=HELPER`);
+            const response = await fetch(`${API_BASE}/api/bookings?userId=${helperId}&role=HELPER`);
             const data = await response.json();
             callback(data);
         } catch (error) {

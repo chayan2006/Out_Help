@@ -109,3 +109,246 @@
 2026-02-14T01:31:01.045Z [LOG] Gemini API Key Presence: true
 2026-02-14T01:31:01.053Z [LOG] Backend server running at http://localhost:5000
 2026-02-14T01:31:01.058Z [LOG] Connected to SQLite database.
+2026-02-14T01:38:29.859Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }[0m
+2026-02-14T01:38:30.236Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:38:30.406Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:38:30.416Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:38:30.421Z [LOG] Connected to SQLite database.
+2026-02-14T01:38:59.588Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  write to custom object with { processEnv: myObject }[0m
+2026-02-14T01:39:00.052Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:39:00.213Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:39:00.222Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:39:00.225Z [LOG] Connected to SQLite database.
+2026-02-14T01:39:51.387Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🤖 agentic secret storage: https://dotenvx.com/as2[0m
+2026-02-14T01:39:51.755Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:39:51.914Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:39:51.923Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:39:51.927Z [LOG] Connected to SQLite database.
+2026-02-14T01:39:58.042Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:39:58.069Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:39:58.078Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:39:58.087Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:39:58.090Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:39:58.094Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:39:58.099Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:39:58.101Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:40:26.502Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit[0m
+2026-02-14T01:40:26.926Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:40:27.272Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:40:27.282Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:40:27.287Z [LOG] Connected to SQLite database.
+2026-02-14T01:40:54.908Z [LOG] [dotenv@17.3.1] injecting env (2) from ..\frontend\.env.local [2m-- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }[0m
+2026-02-14T01:40:55.238Z [LOG] Firebase Admin & Firestore initialized
+2026-02-14T01:40:55.369Z [LOG] Gemini API Key Presence: true
+2026-02-14T01:40:55.377Z [LOG] Backend server running at http://localhost:5000
+2026-02-14T01:40:55.381Z [LOG] Connected to SQLite database.
+2026-02-14T01:40:58.063Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:40:58.082Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:40:58.089Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:40:58.098Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:40:58.101Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:40:58.102Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:40:58.104Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:40:58.106Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:41:58.004Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:41:58.013Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:41:58.016Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:41:58.023Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:41:58.025Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:41:58.027Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:41:58.034Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:41:58.036Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:22.660Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:22.667Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:22.671Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:22.675Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:27.306Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:27.308Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:27.311Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:27.314Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:32.309Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:32.321Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:32.326Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:32.332Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:37.304Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:37.306Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:37.309Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:37.312Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:42.302Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:42.313Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:42.316Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:42.320Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:44.924Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:44.927Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:44.961Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:44.974Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:48.001Z [LOG] [GET /api/bookings] userId: undefined, role: HELPER
+2026-02-14T01:42:48.003Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:48.008Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:48.011Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:48.138Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:48.142Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:57.986Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:42:58.027Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:58.029Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:58.038Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:42:58.048Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:58.059Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:58.060Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:58.093Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:58.277Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:42:58.280Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:42:58.280Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:42:58.282Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:10.212Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:10.219Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:10.233Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:10.238Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:11.151Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:11.154Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:11.166Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:11.168Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:15.217Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:15.220Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:16.996Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:16.998Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:17.001Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:17.003Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:20.217Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:20.220Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:21.999Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:22.002Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:22.012Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:22.015Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:25.214Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:25.217Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:26.988Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:26.990Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:26.992Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:26.993Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:28.743Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:28.745Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:28.749Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:28.750Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:31.990Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:31.997Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:32.002Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:32.008Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:33.751Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:33.754Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:36.997Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:36.999Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:37.002Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:37.006Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:38.756Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:38.760Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:41.986Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:41.993Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:41.998Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:42.002Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:43.748Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:43.750Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:48.748Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:48.752Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:53.762Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:53.765Z [LOG] [GET /api/bookings] Returning 2 rows
+2026-02-14T01:43:57.985Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:43:57.987Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:43:57.991Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:57.993Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:43:58.312Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:58.316Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:43:58.324Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:58.327Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:43:58.743Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:43:58.747Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:03.314Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:03.317Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:03.743Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:03.746Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:08.319Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:08.323Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:08.750Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:08.753Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:13.312Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:13.313Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:13.753Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:13.755Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:18.315Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:18.317Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:18.744Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:18.747Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:28.090Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:28.116Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:28.136Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:28.138Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:28.140Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:28.142Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:28.142Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:28.149Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:33.067Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:33.070Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:33.072Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:33.074Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:38.070Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:38.080Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:38.085Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:38.091Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:43.059Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:43.060Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:43.063Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:43.065Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:48.101Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:48.107Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:48.111Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:48.113Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:53.062Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:53.064Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:53.068Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:53.072Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:57.996Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:57.999Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:58.002Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:58.007Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:58.091Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:44:58.113Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:44:58.114Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:44:58.119Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:03.073Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:03.075Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:03.079Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:03.081Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:08.073Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:08.078Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:08.082Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:08.085Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:13.068Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:13.070Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:13.073Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:13.076Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:18.071Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:18.075Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:23.066Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:23.069Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:25.718Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:25.721Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:28.067Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:28.071Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:28.380Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:28.381Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:29.902Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:29.906Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:31.088Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:31.090Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:31.503Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:31.504Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:31.896Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:31.898Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:32.335Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:32.337Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:33.070Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:33.073Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:58.006Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: HELPER
+2026-02-14T01:45:58.009Z [LOG] [GET /api/bookings] Returning 3 rows
+2026-02-14T01:45:58.041Z [LOG] [GET /api/bookings] userId: wOFxSh9cZBTzDUSCzrV4TpJCdsJ3, role: CUSTOMER
+2026-02-14T01:45:58.044Z [LOG] [GET /api/bookings] Returning 3 rows

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Clock, ChevronRight } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { createBooking } from '../services/bookingService';
-
+import { getUserProfile, SQLProfile } from '../services/userService';
 import { MASTER_SERVICES as services } from '../constants/services';
 
 interface BookingWizardProps {
@@ -18,6 +18,13 @@ const BookingWizard: React.FC<BookingWizardProps> = ({ initialServiceId, onCompl
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [profile, setProfile] = useState<SQLProfile | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      getUserProfile(user.uid).then(setProfile);
+    }
+  }, [user]);
 
   // Skip service selection if ID is provided
   useEffect(() => {
@@ -30,8 +37,23 @@ const BookingWizard: React.FC<BookingWizardProps> = ({ initialServiceId, onCompl
   const getPrice = () => {
     const service = services.find(s => s.id === selectedService);
     if (!service) return 0;
-    // Simple mock dynamic pricing logic
-    return service.basePrice + (location.length > 0 ? 5 : 0) + (step === 3 ? 0 : 0);
+
+    let base = service.basePrice + (location.length > 0 ? 5 : 0);
+
+    // Apply Subscription Discounts
+    if (profile?.subscription_plan_id === 'pro') {
+      base = base * 0.95; // 5% Discount
+    } else if (profile?.subscription_plan_id === 'elite') {
+      base = base * 0.85; // 15% Discount
+    }
+
+    return base;
+  };
+
+  const getDiscountInfo = () => {
+    if (profile?.subscription_plan_id === 'pro') return "Pro Discount (5%)";
+    if (profile?.subscription_plan_id === 'elite') return "Elite Discount (15%)";
+    return null;
   };
 
   const nextStep = () => setStep(s => s + 1);
@@ -189,6 +211,12 @@ const BookingWizard: React.FC<BookingWizardProps> = ({ initialServiceId, onCompl
               <span className="font-semibold text-slate-900">{new Date(date).toLocaleString()}</span>
             </div>
             <div className="h-px bg-slate-200 my-2" />
+            {getDiscountInfo() && (
+              <div className="flex justify-between text-emerald-600 text-sm font-medium mb-1">
+                <span>{getDiscountInfo()} Applied</span>
+                <span>-₹{(services.find(s => s.id === selectedService)!.basePrice - getPrice()).toFixed(2)}</span>
+              </div>
+            )}
             <div className="flex justify-between text-lg">
               <span className="font-bold text-slate-800">Total Estimate</span>
               <span className="font-bold text-indigo-600">₹{getPrice().toFixed(2)}</span>

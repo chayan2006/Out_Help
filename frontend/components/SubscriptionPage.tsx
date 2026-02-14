@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Check, Star, Shield, Zap, Loader2, ArrowLeft, Camera, Ticket, Download } from 'lucide-react';
 import { SubscriptionPlan } from '../types';
 import { useAuth } from '../contexts/AuthContext';
-import { useFirestoreDoc } from '../hooks/useFirestore';
+import { getUserProfile, SQLProfile } from '../services/userService';
 
 const plans: SubscriptionPlan[] = [
   {
@@ -41,9 +41,20 @@ const SubscriptionPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [ticketData, setTicketData] = useState<{ ticketNumber: string, date: string } | null>(null);
+  const [profile, setProfile] = useState<SQLProfile | null>(null);
 
-  const { data: profileData } = useFirestoreDoc('users', user?.uid || '');
-  const currentPlanId = profileData?.subscriptionPlanId || 'free';
+  const fetchProfile = async () => {
+    if (user) {
+      const data = await getUserProfile(user.uid);
+      setProfile(data);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchProfile();
+  }, [user]);
+
+  const currentPlanId = profile?.subscription_plan_id || 'free';
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -103,6 +114,7 @@ const SubscriptionPage: React.FC = () => {
       if (response.ok) {
         setTicketData({ ticketNumber: data.ticketNumber, date: data.date });
         setMessage({ type: 'success', text: 'Payment verification submitted successfully! 🎉' });
+        fetchProfile(); // Re-fetch SQL profile to show active plan
       } else {
         throw new Error(data.error || 'Failed to submit payment proof');
       }
@@ -132,6 +144,7 @@ const SubscriptionPage: React.FC = () => {
       if (response.ok) {
         setMessage({ type: 'success', text: `Successfully upgraded to ${plans.find(p => p.id === planId)?.name}! 🎉` });
         setShowCheckout(null);
+        fetchProfile(); // Re-fetch SQL profile
       } else {
         throw new Error('Failed to update subscription in database');
       }
